@@ -29,5 +29,13 @@ def result = [
     grouped  : grouped,
     longest  : [name: longest.name, time: longest.time]
 ]
+// Challenge 1: Failure Count per Status
+def failureCounts = [:].withDefault{0}
+rows.each { build ->
+    if (build.status != 'SUCCESS') {
+        failureCounts[build.status]++
+    }
+}
+result.failures = failureCounts
 
 println JsonOutput.prettyPrint(JsonOutput.toJson(result))
