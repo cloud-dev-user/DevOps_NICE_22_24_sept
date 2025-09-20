@@ -29,6 +29,7 @@ def result = [
     grouped  : grouped,
     longest  : [name: longest.name, time: longest.time]
 ]
+
 // Challenge 1: Failure Count per Status
 def failureCounts = [:].withDefault{0}
 rows.each { build ->
@@ -37,5 +38,9 @@ rows.each { build ->
     }
 }
 result.failures = failureCounts
+
+// Challenge 2: Filter Builds by Duration (> 100 sec)
+def longBuilds = rows.findAll { it.time > 100 }
+result.longBuilds = longBuilds*.name
 
 println JsonOutput.prettyPrint(JsonOutput.toJson(result))
