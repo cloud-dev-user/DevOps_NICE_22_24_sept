@@ -3,3 +3,4 @@ service-a,120,SUCCESS
 service-b,240,FAILURE
 service-c,60,SUCCESS
 service-d,300,UNSTABLE
+service-d,400,STABLE
